@@ -24,7 +24,7 @@
 
 # npm install webpack-dev-server(我们常用 npm run dev/serve) 开发依赖 在webpack中可以设置 服务的配置
 
-<!-- --quiet: //控制台中不输出打包的信息，开发中一般设置为false，进行 打印，这样查看错误比较方面
+--quiet: //控制台中不输出打包的信息，开发中一般设置为false，进行 打印，这样查看错误比较方面
 --no-info: // 不显示任何信息
 --colors: //对信息进行颜色输出
 --no-colors: //对信息不进行颜色输出
@@ -34,36 +34,30 @@
 --inline: //webpack-dev-server会在你的webpack.config.js的入口配置文件中再添加一个入口,
 --hot: //开发热替换
 --open: //启动命令，自动打开浏览器
---history-api-fallback: //查看历史url -->
+--history-api-fallback: //查看历史url
 # 配置es6 转换为 es5
-  <!-- 
-   --npm install babel-loader @babel/core @babel/preset-env -D  // 添加babel文件
-  -->
-    <!-- 
+--npm install babel-loader @babel/core @babel/preset-env -D  // 添加babel文件
       test: /\.js$/,
       use: {
       loader: 'babel-loader',
       options: {
       presets:['@babel/preset-env']
-      } -->
 #  将引进的的模块做为全局变量例如jQ
-  <!-- 
-   --npm install jquery -s expose-loader
-   --  import $ from 'expose-loader?$!jquery'  //  expose-loader 内联配置 
-   -- {
-          test: require.resolve('jquery'), webpack rules:[]中配置
-          loader: 'expose-loader?$'
-      }
-   --         
-   --   new webpack.ProvidePlugin({ 每个模块通过注入的方式
-   --  })
-   --   externals: { // cdn 需要在主文件中引入cdn 可以压缩文件
-         jquery: '$'
-        },
-  -->
+--npm install jquery -s expose-loader
+--  import $ from 'expose-loader?$!jquery'  //  expose-loader 内联配置 
+ {
+   test: require.resolve('jquery'), webpack rules:[]中配置
+   loader: 'expose-loader?$'
+ }         
+    new webpack.ProvidePlugin({ 每个模块通过注入的方式
+    })
+    externals: { // cdn 需要在主文件中引入cdn 可以压缩文件
+      jquery: '$'
+   }
+
   # 前端项目中除了html、css、js，不可避免地要处理图片文件，webpack打包图片文件是通过file-loader、url-loader处理的。
-  <!-- url-loader可以将指定大小及以下的图片文件转成base64写入js，避免额外请求图片资源，如果超过指定大小再使用file-loader打包图片文件。 -->
-  <!-- 
+url-loader可以将指定大小及以下的图片文件转成base64写入js，避免额外请求图片资源，如果超过指定大小再使用file-loader打包图片文件。
+
     {
         test: /\.(png|svg|jpg|gif)$/,
         use: [
@@ -71,8 +65,6 @@
             ]
 
         }
-  -->
-  <!-- {
      test: /\.(png|svg|jpg|gif)$/,
      use: {
      loader: 'url-loader',
@@ -81,10 +73,12 @@
      limit: 20000
       }
    }
-  }, -->
+  }, 
   # 分类文件 
   # 在文件
   # outputPath: 'assets/imgs'
   
   # 删除dist目录来 插件 webpack-clean-plugin
     这个可以实施打包时删除dist
+  # watch 可以实时检测文件是不是需要打包
+   watch:true
