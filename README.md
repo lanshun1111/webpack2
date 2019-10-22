@@ -154,12 +154,12 @@ new webpack.DllReferencePlugin({
 
 
 
-<!-- # happypack 多线程打包 替换我们之前的loader
+# happypack 多线程打包 替换我们之前的loader
  npm install happypack --save-dev
 
  const HappyPack = require('happypack');
  use: ['happypack/loader?id=babel'] -->
- <!-- 这里不讲解 -->
+ <!-- 这里不讲解
 
 
  
