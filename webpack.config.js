@@ -8,8 +8,12 @@ module.exports = {
     devServer: {
         port: '8081',
         contentBase: './dist',
-        proxy:{
-            target:'http://localhost:3000',
+        proxy: {
+            '/api': {
+                target: 'http://localhost:3000',
+                changeOrigin: true,
+                pathRewrite: { "^/api": "" } // 将/api重写为""空字符串
+            }
         }
     },
     output: {
@@ -17,7 +21,19 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         chunkFilename: '[name].min.js'
     },
+    resolve: {
+        modules: [
+         'node_modules' // 首先在根目录下寻找
+        ],
+        extensions: ['.js', '.json','.css'], // 查找扩展名
+        alias:{ 
+            bootstrap: 'bootstrap/dist/css/bootstrap.css'
+        }
+    },
     plugins: [
+        new webpack.DefinePlugin({
+          DEV:JSON.stringify('production')
+        }),
         new htmlWebpackPlugin({
             filename: 'index.html',
             template: 'lld.html',
@@ -26,7 +42,8 @@ module.exports = {
             chunks: ['home']
         }),
         new webpack.ProvidePlugin({
-            $: 'jquery'
+            $: "jquery",
+            jQuery: "jquery",
         }),
         new MiniCssExtractPlugin({
             filename: 'css/[name].css',
