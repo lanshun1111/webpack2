@@ -101,4 +101,11 @@ url-loader可以将指定大小及以下的图片文件转成base64写入js，�
 
 
 # new webpack.DefinePlugin 定义环境变量
+  new webpack.DefinePlugin({  DEV:JSON.stringify('production') })
+  console.log(DEV)
+  if(DEV !=='production'){
+    console.log(111)
+  }
+  
+
   
