@@ -70,10 +70,6 @@ module.exports = {
                     }
                 }
             },
-            // {
-            //     test: require.resolve('jquery'),
-            //     loader: 'expose-loader?$'
-            // },
             {
                 test: /\.css/,
                 use: [

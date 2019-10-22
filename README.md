@@ -100,12 +100,67 @@ url-loader可以将指定大小及以下的图片文件转成base64写入js，�
     }
 
 
-# new webpack.DefinePlugin 定义环境变量
+# new webpack.DefinePlugin 定义一个环境变量 
   new webpack.DefinePlugin({  DEV:JSON.stringify('production') })
   console.log(DEV)
   if(DEV !=='production'){
     console.log(111)
   }
   
+# 区分环境变量  很多时候，我们都需要针对不同的环境进行不用的操作。
+  webpack.dev.js  webpack.prod.js 
+  let { smart }  =require('webpack-merge')
+  let base = require('./webpack.base.js')
+  module.exports = smart(base,{
+    mode: 'production'
+  })
 
+# noParse 优化项 不去解析 
+   noParse:/jquery/
+# IgonrePlugin 忽视某些文件
+   <!-- moment -->
+ new webpack.IgnorePlugin(/\.\/locale/,/moment/)
+
+<!-- 分割 -->
+# 搭建环境项目
+
+
+
+
+
+
+
+
+
+# 创建 react
+ npm install --save-dev @babel/preset-env
+npm install --save-dev @babel/preset-react 
+ npm install -D react react-dom
+
+ #  Dllplugin 优化
+   在使用 Dllplugin 之前，首先我们应该了解它是干什么的，如果你的项目够大的话，可能每次编译都要花费很多时间，那么Dllplugin就是用来处理这个事情的。
   
+  new webpack.Dllplugin({ 
+     name:'lld_[name]',
+     path:path.resolve(__dirname,'dist','lld.json')
+  })
+  npx webpack --config webpack.config.react.js
+# DllReferencePlugin
+这个插件把只有 dll 的 bundle(们)(dll-only-bundle(s)) 引用到需要的预编译的依赖
+new webpack.DllReferencePlugin({ 
+     name:'lld_[name]',
+     path:path.resolve(__dirname,'dist','lld.json') 
+})
+
+
+
+<!-- # happypack 多线程打包 替换我们之前的loader
+ npm install happypack --save-dev
+
+ const HappyPack = require('happypack');
+ use: ['happypack/loader?id=babel'] -->
+ <!-- 这里不讲解 -->
+
+
+ 
+ 
